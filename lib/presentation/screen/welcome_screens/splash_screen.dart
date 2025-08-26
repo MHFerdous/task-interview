@@ -3,10 +3,10 @@ import 'package:get/get.dart';
 import 'package:interview/app/styling/size_config.dart';
 import 'package:interview/presentation/screen/welcome_screens/onboarding_screen_one.dart';
 import 'package:interview/presentation/utility/image_assets.dart';
-import 'package:interview/presentation/widgets/image_and_icon.dart';
-import 'package:interview/presentation/widgets/navigation_animation.dart';
-import 'package:interview/presentation/widgets/subHeader_text.dart';
-import 'package:interview/presentation/widgets/header_text.dart';
+import 'package:interview/presentation/widgets/custom_image.dart';
+import 'package:interview/presentation/widgets/custom_navigation_animation.dart';
+import 'package:interview/presentation/widgets/custom_sub_header_text.dart';
+import 'package:interview/presentation/widgets/custom_header_text.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
     //final session = Supabase.instance.client.auth.currentSession;
     await Future.delayed(Duration(seconds: 2));
     if (mounted) {
-      Get.offAll(NavigationAnimation(screen: OnboardingScreenOne()));
+      Get.offAll(CustomNavigationAnimation(screen: OnboardingScreenOne()));
     }
   }
 
@@ -43,15 +43,15 @@ class _SplashScreenState extends State<SplashScreen> {
             child: Column(
               children: [
                 SizedBox(height: SizeConfig.screenHeight * 0.185),
-                ImageAndIcon(
+                CustomImage(
                   width: 0.140,
                   height: 0.140,
                   icon: ImageAssets.carIconSVG,
                 ),
                 SizedBox(height: SizeConfig.screenHeight * 0.016),
-                HeaderText(text: 'Theory test in my language'),
+                CustomHeaderText(text: 'Theory test in my language'),
                 SizedBox(height: SizeConfig.screenHeight * 0.008),
-                SubHeaderText(
+                CustomSubHeaderText(
                   text:
                       'I must write the real test will be in English language and this app just helps you to understand the materials in your language',
                 ),

@@ -4,10 +4,10 @@ import 'package:interview/app/styling/size_config.dart';
 import 'package:interview/presentation/screen/auth_screens/signin_screen.dart';
 import 'package:interview/presentation/utility/app_colors.dart';
 import 'package:interview/presentation/utility/image_assets.dart';
-import 'package:interview/presentation/widgets/image_and_icon.dart';
-import 'package:interview/presentation/widgets/navigation_animation.dart';
-import 'package:interview/presentation/widgets/subHeader_text.dart';
-import 'package:interview/presentation/widgets/header_text.dart';
+import 'package:interview/presentation/widgets/custom_image.dart';
+import 'package:interview/presentation/widgets/custom_navigation_animation.dart';
+import 'package:interview/presentation/widgets/custom_sub_header_text.dart';
+import 'package:interview/presentation/widgets/custom_header_text.dart';
 
 class OnboardingScreenTwo extends StatefulWidget {
   const OnboardingScreenTwo({super.key});
@@ -30,15 +30,15 @@ class _OnboardingScreenTwoState extends State<OnboardingScreenTwo> {
             child: Column(
               children: [
                 SizedBox(height: SizeConfig.screenHeight * 0.185),
-                ImageAndIcon(
+                CustomImage(
                   width: 0.330,
                   height: 0.330,
                   icon: ImageAssets.onboardingImageOneSVG,
                 ),
                 SizedBox(height: SizeConfig.screenHeight * 0.056),
-                HeaderText(text: 'Explore your new skill today'),
+                CustomHeaderText(text: 'Explore your new skill today'),
                 SizedBox(height: SizeConfig.screenHeight * 0.008),
-                SubHeaderText(
+                CustomSubHeaderText(
                   text:
                       'Our platform is designed to help you explore new skills. Let’s learn & grow with Eduline!',
                 ),
@@ -64,7 +64,7 @@ class _OnboardingScreenTwoState extends State<OnboardingScreenTwo> {
                 SizedBox(height: SizeConfig.screenHeight * 0.064),
                 ElevatedButton(
                   onPressed: () {
-                    Get.offAll(NavigationAnimation(screen: SigninScreen()));
+                    Get.offAll(CustomNavigationAnimation(screen: SigninScreen()));
                   },
                   child: Text('Get Started'),
                 ),

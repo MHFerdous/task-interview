@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:interview/app/styling/size_config.dart';
 import 'package:interview/presentation/widgets/custom_text_button.dart';
-import 'package:interview/presentation/widgets/header_text.dart';
-import 'package:interview/presentation/widgets/subHeader_text.dart';
+import 'package:interview/presentation/widgets/custom_header_text.dart';
+import 'package:interview/presentation/widgets/custom_sub_header_text.dart';
 
 class VerifyCodeScreen extends StatefulWidget {
   const VerifyCodeScreen({super.key});
@@ -67,9 +67,9 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
                     child: Column(
                       children: [
                         SizedBox(height: SizeConfig.screenHeight * 0.012),
-                        HeaderText(text: 'Verify Code'),
+                        CustomHeaderText(text: 'Verify Code'),
                         SizedBox(height: SizeConfig.screenHeight * 0.008),
-                        SubHeaderText(
+                        CustomSubHeaderText(
                           text:
                               'Please enter the code we just sent to email pristia@gmail.com',
                         ),
@@ -77,7 +77,7 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
                         SizedBox(height: SizeConfig.screenHeight * 0.044),
 
                         _start == 0
-                            ? SubHeaderText(text: 'Resend Code in: $_start')
+                            ? CustomSubHeaderText(text: 'Resend Code in: $_start')
                             : CustomTextButton(
                               text: 'Resend Code',
                               onPressed: () {},

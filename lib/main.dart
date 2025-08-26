@@ -1,12 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:interview/app/styling/text_styles.dart';
-import 'package:interview/presentation/screen/auth_screens/forgot_password_screen.dart';
-import 'package:interview/presentation/screen/auth_screens/reset_password_screen.dart';
-import 'package:interview/presentation/screen/auth_screens/signin_screen.dart';
-import 'package:interview/presentation/screen/auth_screens/signup_screen.dart';
-import 'package:interview/presentation/screen/auth_screens/verify_code_screen.dart';
-import 'package:interview/presentation/screen/welcome_screens/onboarding_screen_one.dart';
-import 'package:interview/presentation/screen/welcome_screens/onboarding_screen_two.dart';
 import 'package:interview/presentation/screen/welcome_screens/splash_screen.dart';
 import 'package:interview/presentation/utility/app_colors.dart';
 
@@ -24,7 +17,7 @@ class MyApp extends StatelessWidget {
     SizeConfig.init(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: VerifyCodeScreen(),
+      home: SplashScreen(),
       theme: ThemeData(
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(

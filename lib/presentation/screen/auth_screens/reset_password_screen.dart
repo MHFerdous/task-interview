@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:interview/app/styling/size_config.dart';
-import 'package:interview/presentation/widgets/header_text.dart';
-import 'package:interview/presentation/widgets/subHeader_text.dart';
-import 'package:interview/presentation/widgets/text_field.dart';
-import 'package:interview/presentation/widgets/title_text.dart';
+import 'package:interview/presentation/widgets/custom_header_text.dart';
+import 'package:interview/presentation/widgets/custom_sub_header_text.dart';
+import 'package:interview/presentation/widgets/custom_text_form_field.dart';
+import 'package:interview/presentation/widgets/custom_title_text.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   const ResetPasswordScreen({super.key});
@@ -38,9 +38,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     child: Column(
                       children: [
                         SizedBox(height: SizeConfig.screenHeight * 0.012),
-                        HeaderText(text: 'Reset Password'),
+                        CustomHeaderText(text: 'Reset Password'),
                         SizedBox(height: SizeConfig.screenHeight * 0.008),
-                        SubHeaderText(
+                        CustomSubHeaderText(
                           text:
                               'Your password must be at least 8 characters long and include a combination of letters, numbers',
                         ),

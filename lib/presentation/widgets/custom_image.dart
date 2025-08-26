@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:interview/app/styling/size_config.dart';
 
-class ImageAndIcon extends StatelessWidget {
-  const ImageAndIcon({super.key, required this.width, required this.height, required this.icon});
+class CustomImage extends StatelessWidget {
+  const CustomImage({
+    super.key,
+    required this.width,
+    required this.height,
+    required this.icon,
+  });
   final double width, height;
   final String icon;
 

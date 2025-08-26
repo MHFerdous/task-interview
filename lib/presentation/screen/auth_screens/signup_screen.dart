@@ -3,11 +3,11 @@ import 'package:get/get.dart';
 import 'package:interview/app/styling/size_config.dart';
 import 'package:interview/presentation/screen/auth_screens/signin_screen.dart';
 import 'package:interview/presentation/widgets/custom_text_button.dart';
-import 'package:interview/presentation/widgets/header_text.dart';
-import 'package:interview/presentation/widgets/navigation_animation.dart';
-import 'package:interview/presentation/widgets/subHeader_text.dart';
-import 'package:interview/presentation/widgets/text_field.dart';
-import 'package:interview/presentation/widgets/title_text.dart';
+import 'package:interview/presentation/widgets/custom_header_text.dart';
+import 'package:interview/presentation/widgets/custom_navigation_animation.dart';
+import 'package:interview/presentation/widgets/custom_sub_header_text.dart';
+import 'package:interview/presentation/widgets/custom_text_form_field.dart';
+import 'package:interview/presentation/widgets/custom_title_text.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -44,9 +44,9 @@ class _SignupScreenState extends State<SignupScreen> {
                 children: [
                   SizedBox(height: SizeConfig.screenHeight * 0.024),
 
-                  HeaderText(text: 'Welcome to Eduline'),
+                  CustomHeaderText(text: 'Welcome to Eduline'),
                   SizedBox(height: SizeConfig.screenHeight * 0.008),
-                  SubHeaderText(
+                  CustomSubHeaderText(
                     text:
                         'Let’s join to Eduline learning ecosystem & meet our professional mentor. It’s Free!',
                   ),
@@ -113,11 +113,11 @@ class _SignupScreenState extends State<SignupScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SubHeaderText(text: 'Already have an account?  '),
+                      CustomSubHeaderText(text: 'Already have an account?  '),
                       CustomTextButton(
                         text: 'Sign In',
                         onPressed: () {
-                          Get.to(NavigationAnimation(screen: SigninScreen()));
+                          Get.to(CustomNavigationAnimation(screen: SigninScreen()));
                         },
                       ),
                     ],

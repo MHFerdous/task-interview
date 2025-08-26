@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:interview/app/styling/size_config.dart';
 import 'package:interview/presentation/screen/auth_screens/verify_code_screen.dart';
-import 'package:interview/presentation/widgets/header_text.dart';
-import 'package:interview/presentation/widgets/navigation_animation.dart';
-import 'package:interview/presentation/widgets/subHeader_text.dart';
-import 'package:interview/presentation/widgets/text_field.dart';
-import 'package:interview/presentation/widgets/title_text.dart';
+import 'package:interview/presentation/widgets/custom_header_text.dart';
+import 'package:interview/presentation/widgets/custom_navigation_animation.dart';
+import 'package:interview/presentation/widgets/custom_sub_header_text.dart';
+import 'package:interview/presentation/widgets/custom_text_form_field.dart';
+import 'package:interview/presentation/widgets/custom_title_text.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
@@ -42,9 +42,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       children: [
                         SizedBox(height: SizeConfig.screenHeight * 0.012),
 
-                        HeaderText(text: 'Forgot Password'),
+                        CustomHeaderText(text: 'Forgot Password'),
                         SizedBox(height: SizeConfig.screenHeight * 0.008),
-                        SubHeaderText(
+                        CustomSubHeaderText(
                           text:
                               'Enter your email, we will send a verification code to email',
                         ),
@@ -74,7 +74,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   SizedBox(height: SizeConfig.screenHeight * 0.040),
                   ElevatedButton(
                     onPressed: () {
-                      Get.to(NavigationAnimation(screen: VerifyCodeScreen()));
+                      Get.to(CustomNavigationAnimation(screen: VerifyCodeScreen()));
                     },
                     child: Text('Continue'),
                   ),
