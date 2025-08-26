@@ -5,8 +5,8 @@ import 'package:interview/presentation/screen/welcome_screens/onboarding_screen_
 import 'package:interview/presentation/utility/image_assets.dart';
 import 'package:interview/presentation/widgets/image_and_icon.dart';
 import 'package:interview/presentation/widgets/navigation_animation.dart';
-import 'package:interview/presentation/widgets/subtitle_text.dart';
-import 'package:interview/presentation/widgets/title_text.dart';
+import 'package:interview/presentation/widgets/subHeader_text.dart';
+import 'package:interview/presentation/widgets/header_text.dart';
 
 class OnboardingScreenOne extends StatefulWidget {
   const OnboardingScreenOne({super.key});
@@ -35,9 +35,9 @@ class _OnboardingScreenOneState extends State<OnboardingScreenOne> {
                   icon: ImageAssets.onboardingImageOneSVG,
                 ),
                 SizedBox(height: SizeConfig.screenHeight * 0.056),
-                TitleText(text: 'Best online courses in the world'),
+                HeaderText(text: 'Best online courses in the world'),
                 SizedBox(height: SizeConfig.screenHeight * 0.008),
-                SubtitleText(
+                SubHeaderText(
                   text:
                       'Now you can learn anywhere, anytime, even if there is no internet access!',
                 ),

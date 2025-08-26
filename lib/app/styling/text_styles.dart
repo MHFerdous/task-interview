@@ -5,15 +5,21 @@ import 'package:interview/presentation/utility/app_colors.dart';
 class TextStyles {
   TextStyles._();
 
-  static TextStyle title = TextStyle(
+  static TextStyle header = TextStyle(
     fontSize: 24,
     fontWeight: FontWeight.w700,
-    color: AppColors.tertiaryColor,
+    color: AppColors.headerColor,
   );
 
-  static TextStyle subTitle = TextStyle(
+  static TextStyle subHeader = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w400,
-    color: AppColors.quadrantColor,
+    color: AppColors.subHeaderColor,
+  );
+  static TextStyle title = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+    color: AppColors.subHeaderColor,
+    letterSpacing: 0.3
   );
 }

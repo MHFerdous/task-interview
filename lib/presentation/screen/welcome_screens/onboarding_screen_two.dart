@@ -6,8 +6,8 @@ import 'package:interview/presentation/utility/app_colors.dart';
 import 'package:interview/presentation/utility/image_assets.dart';
 import 'package:interview/presentation/widgets/image_and_icon.dart';
 import 'package:interview/presentation/widgets/navigation_animation.dart';
-import 'package:interview/presentation/widgets/subtitle_text.dart';
-import 'package:interview/presentation/widgets/title_text.dart';
+import 'package:interview/presentation/widgets/subHeader_text.dart';
+import 'package:interview/presentation/widgets/header_text.dart';
 
 class OnboardingScreenTwo extends StatefulWidget {
   const OnboardingScreenTwo({super.key});
@@ -36,9 +36,9 @@ class _OnboardingScreenTwoState extends State<OnboardingScreenTwo> {
                   icon: ImageAssets.onboardingImageOneSVG,
                 ),
                 SizedBox(height: SizeConfig.screenHeight * 0.056),
-                TitleText(text: 'Explore your new skill today'),
+                HeaderText(text: 'Explore your new skill today'),
                 SizedBox(height: SizeConfig.screenHeight * 0.008),
-                SubtitleText(
+                SubHeaderText(
                   text:
                       'Our platform is designed to help you explore new skills. Let’s learn & grow with Eduline!',
                 ),

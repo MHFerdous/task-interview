@@ -7,10 +7,6 @@ class TitleText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      textAlign: TextAlign.center,
-      style: TextStyles.title,
-    );
+    return Text(text, style: TextStyles.title);
   }
 }

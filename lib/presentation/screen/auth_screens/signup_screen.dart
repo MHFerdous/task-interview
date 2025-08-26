@@ -1,0 +1,133 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:interview/app/styling/size_config.dart';
+import 'package:interview/presentation/screen/auth_screens/signin_screen.dart';
+import 'package:interview/presentation/widgets/custom_text_button.dart';
+import 'package:interview/presentation/widgets/header_text.dart';
+import 'package:interview/presentation/widgets/navigation_animation.dart';
+import 'package:interview/presentation/widgets/subHeader_text.dart';
+import 'package:interview/presentation/widgets/text_field.dart';
+import 'package:interview/presentation/widgets/title_text.dart';
+
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
+
+  @override
+  State<SignupScreen> createState() => _SignupScreenState();
+}
+
+class _SignupScreenState extends State<SignupScreen> {
+  final _formKey = GlobalKey<FormState>();
+
+  final _emailTEController = TextEditingController();
+
+  final _fullNameTEController = TextEditingController();
+
+  final _passwordTEController = TextEditingController();
+
+  final _emailRegex = RegExp(r'^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$');
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: SizeConfig.screenWidth * 0.026,
+              vertical: SizeConfig.screenHeight * 0.020,
+            ),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: SizeConfig.screenHeight * 0.024),
+
+                  HeaderText(text: 'Welcome to Eduline'),
+                  SizedBox(height: SizeConfig.screenHeight * 0.008),
+                  SubHeaderText(
+                    text:
+                        'Let’s join to Eduline learning ecosystem & meet our professional mentor. It’s Free!',
+                  ),
+
+                  SizedBox(height: SizeConfig.screenHeight * 0.036),
+                  TitleText(text: 'Email Address'),
+                  SizedBox(height: SizeConfig.screenHeight * 0.010),
+                  CustomTextFormField(
+                    controller: _emailTEController,
+                    textInputAction: TextInputAction.next,
+                    hintText: 'Email Address',
+                    textInputType: TextInputType.emailAddress,
+                    isPasswordField: false,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Enter your email';
+                      } else if (!_emailRegex.hasMatch(value)) {
+                        return 'Enter valid email';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: SizeConfig.screenHeight * 0.016),
+                  TitleText(text: 'Full Name'),
+                  SizedBox(height: SizeConfig.screenHeight * 0.010),
+                  CustomTextFormField(
+                    controller: _fullNameTEController,
+                    textInputAction: TextInputAction.next,
+                    hintText: 'Full Name',
+                    textInputType: TextInputType.name,
+                    isPasswordField: false,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Enter your name';
+                      } else if (value.length < 3) {
+                        return 'Enter valid name';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: SizeConfig.screenHeight * 0.016),
+
+                  TitleText(text: 'Password'),
+                  SizedBox(height: SizeConfig.screenHeight * 0.010),
+                  CustomTextFormField(
+                    controller: _passwordTEController,
+                    textInputAction: TextInputAction.done,
+                    hintText: 'Password',
+                    textInputType: TextInputType.visiblePassword,
+                    isPasswordField: true,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Enter your password';
+                      } else if (value.length < 6) {
+                        return 'Password length greater than 6';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: SizeConfig.screenHeight * 0.024),
+
+                  ElevatedButton(onPressed: () {}, child: Text('Sign Up')),
+                  SizedBox(height: SizeConfig.screenHeight * 0.016),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SubHeaderText(text: 'Already have an account?  '),
+                      CustomTextButton(
+                        text: 'Sign In',
+                        onPressed: () {
+                          Get.to(NavigationAnimation(screen: SigninScreen()));
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

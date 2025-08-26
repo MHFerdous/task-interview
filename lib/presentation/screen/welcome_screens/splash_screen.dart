@@ -5,8 +5,8 @@ import 'package:interview/presentation/screen/welcome_screens/onboarding_screen_
 import 'package:interview/presentation/utility/image_assets.dart';
 import 'package:interview/presentation/widgets/image_and_icon.dart';
 import 'package:interview/presentation/widgets/navigation_animation.dart';
-import 'package:interview/presentation/widgets/subtitle_text.dart';
-import 'package:interview/presentation/widgets/title_text.dart';
+import 'package:interview/presentation/widgets/subHeader_text.dart';
+import 'package:interview/presentation/widgets/header_text.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -49,9 +49,9 @@ class _SplashScreenState extends State<SplashScreen> {
                   icon: ImageAssets.carIconSVG,
                 ),
                 SizedBox(height: SizeConfig.screenHeight * 0.016),
-                TitleText(text: 'Theory test in my language'),
+                HeaderText(text: 'Theory test in my language'),
                 SizedBox(height: SizeConfig.screenHeight * 0.008),
-                SubtitleText(
+                SubHeaderText(
                   text:
                       'I must write the real test will be in English language and this app just helps you to understand the materials in your language',
                 ),
