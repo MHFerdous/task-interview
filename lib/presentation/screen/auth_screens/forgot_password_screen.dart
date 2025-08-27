@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:interview/app/styling/size_config.dart';
+import 'package:interview/presentation/controllers/password_recovery_controller.dart';
 import 'package:interview/presentation/screen/auth_screens/verify_code_screen.dart';
 import 'package:interview/presentation/widgets/custom_header_text.dart';
-import 'package:interview/presentation/widgets/custom_navigation_animation.dart';
 import 'package:interview/presentation/widgets/custom_sub_header_text.dart';
 import 'package:interview/presentation/widgets/custom_text_form_field.dart';
 import 'package:interview/presentation/widgets/custom_title_text.dart';
@@ -22,9 +22,12 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
   final _emailRegex = RegExp(r'^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$');
 
+  final _passwordRecoveryController = Get.put(PasswordRecoveryController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(leading: BackButton()),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -57,7 +60,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   SizedBox(height: SizeConfig.screenHeight * 0.010),
                   CustomTextFormField(
                     controller: _emailTEController,
-                    textInputAction: TextInputAction.next,
+                    textInputAction: TextInputAction.done,
                     hintText: 'Email Address',
                     textInputType: TextInputType.emailAddress,
                     isPasswordField: false,
@@ -72,11 +75,21 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   ),
 
                   SizedBox(height: SizeConfig.screenHeight * 0.040),
-                  ElevatedButton(
-                    onPressed: () {
-                      Get.to(CustomNavigationAnimation(screen: VerifyCodeScreen()));
-                    },
-                    child: Text('Continue'),
+
+                  Obx(
+                    () => ElevatedButton(
+                      onPressed:
+                          _passwordRecoveryController.isLoading.value
+                              ? null
+                              : () async {
+                                if (_formKey.currentState!.validate()) {
+                                  _passwordRecoveryController.sendResetCode(
+                                    _emailTEController.text,
+                                  );
+                                }
+                              },
+                      child: Text('Continue'),
+                    ),
                   ),
                 ],
               ),

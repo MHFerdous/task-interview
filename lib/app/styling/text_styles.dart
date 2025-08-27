@@ -4,6 +4,12 @@ import 'package:interview/presentation/utility/app_colors.dart';
 class TextStyles {
   TextStyles._();
 
+  static TextStyle largeHeader = TextStyle(
+    fontSize: 32,
+    fontWeight: FontWeight.w700,
+    color: AppColors.headerColor,
+  );
+
   static TextStyle header = TextStyle(
     fontSize: 24,
     fontWeight: FontWeight.w700,
@@ -23,7 +29,7 @@ class TextStyles {
   static TextStyle title = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w500,
-    color: AppColors.subHeaderColor,
+    color: AppColors.titleColors,
     letterSpacing: 0.3,
   );
 }

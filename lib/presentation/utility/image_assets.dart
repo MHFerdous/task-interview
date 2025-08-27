@@ -7,4 +7,5 @@ class ImageAssets {
   static const String signinScreenIconSVG =
       'assets/images/signin_screen_icon.svg';
   static const String mapIconSVG = 'assets/images/map_icon.svg';
+  static const String successPopupIcon = 'assets/images/success_popup_icon.svg';
 }

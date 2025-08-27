@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:interview/app/styling/size_config.dart';
+import 'package:interview/presentation/controllers/signin_controller.dart';
+import 'package:interview/presentation/screen/auth_screens/forgot_password_screen.dart';
 import 'package:interview/presentation/screen/auth_screens/signup_screen.dart';
+import 'package:interview/presentation/utility/app_colors.dart';
 import 'package:interview/presentation/utility/image_assets.dart';
 import 'package:interview/presentation/widgets/custom_text_button.dart';
 import 'package:interview/presentation/widgets/custom_image.dart';
-import 'package:interview/presentation/widgets/custom_navigation_animation.dart';
 import 'package:interview/presentation/widgets/custom_sub_header_text.dart';
 import 'package:interview/presentation/widgets/custom_header_text.dart';
 import 'package:interview/presentation/widgets/custom_text_form_field.dart';
@@ -27,6 +29,8 @@ class _SigninScreenState extends State<SigninScreen> {
 
   final _emailRegex = RegExp(r'^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$');
 
+  final _signinController = Get.put(SigninController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +39,6 @@ class _SigninScreenState extends State<SigninScreen> {
           child: Padding(
             padding: EdgeInsets.symmetric(
               horizontal: SizeConfig.screenWidth * 0.026,
-              vertical: SizeConfig.screenHeight * 0.020,
             ),
             child: Form(
               key: _formKey,
@@ -47,12 +50,12 @@ class _SigninScreenState extends State<SigninScreen> {
                       children: [
                         SizedBox(height: SizeConfig.screenHeight * 0.185),
                         CustomImage(
-                          width: 0.0700,
-                          height: 0.0700,
+                          width: 0.0850,
+                          height: 0.0850,
                           icon: ImageAssets.signinScreenIconSVG,
                         ),
                         SizedBox(height: SizeConfig.screenHeight * 0.016),
-                        CustomHeaderText(text: 'Welcome Back!'),
+                        CustomHeaderText(text: 'Welcome Back!', size: 32),
                         SizedBox(height: SizeConfig.screenHeight * 0.008),
                         CustomSubHeaderText(
                           text: 'Please login first to start your Theory Test.',
@@ -103,11 +106,40 @@ class _SigninScreenState extends State<SigninScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(children: [CustomSubHeaderText(text: 'Remember Me')]),
-                      CustomSubHeaderText(text: 'Forgot Password'),
+                      CustomTextButton(
+                        text: 'Forgot Password',
+                        color: AppColors.subHeaderColor,
+                        onPressed: () {
+                          Get.to(() => ForgotPasswordScreen());
+                        },
+                      ),
                     ],
                   ),
                   SizedBox(height: SizeConfig.screenHeight * 0.024),
-                  ElevatedButton(onPressed: () {}, child: Text('Sign In')),
+
+                  Obx(
+                    () => ElevatedButton(
+                      onPressed:
+                          _signinController.isLoading.value
+                              ? null
+                              : () {
+                                if (_formKey.currentState!.validate()) {
+                                  _signinController.signUp(
+                                    _emailTEController.text.trim(),
+                                    _passwordTEController.text.trim(),
+                                  );
+                                }
+                                /*Get.offAll(
+                            () => EnableLocationScreen(),
+                        transition: Transition.rightToLeft,
+                        curve: Curves.fastOutSlowIn,
+                        duration: const Duration(milliseconds: 500),
+                      );*/
+                              },
+                      child: Text('Sign In'),
+                    ),
+                  ),
+
                   SizedBox(height: SizeConfig.screenHeight * 0.016),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -115,8 +147,14 @@ class _SigninScreenState extends State<SigninScreen> {
                       CustomSubHeaderText(text: 'New to Theory Test?  '),
                       CustomTextButton(
                         text: 'Create Account',
+                        color: AppColors.primaryColor,
                         onPressed: () {
-                          Get.to(CustomNavigationAnimation(screen: SignupScreen()));
+                          Get.to(
+                            () => SignupScreen(),
+                            transition: Transition.rightToLeft,
+                            curve: Curves.fastOutSlowIn,
+                            duration: const Duration(milliseconds: 500),
+                          );
                         },
                       ),
                     ],
@@ -128,5 +166,12 @@ class _SigninScreenState extends State<SigninScreen> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _emailTEController.dispose();
+    _passwordTEController.dispose();
+    super.dispose();
   }
 }

@@ -8,4 +8,5 @@ class AppColors {
   static Color whiteColor = const Color(0xFFFFFFFF);
   static Color errorColor = const Color(0xFFFF0000);
   static Color titleColors = const Color(0xFF0F172A);
+  static Color boxColor = const Color(0xFFEBEBEB);
 }

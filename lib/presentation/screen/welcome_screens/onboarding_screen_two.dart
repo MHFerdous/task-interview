@@ -5,7 +5,6 @@ import 'package:interview/presentation/screen/auth_screens/signin_screen.dart';
 import 'package:interview/presentation/utility/app_colors.dart';
 import 'package:interview/presentation/utility/image_assets.dart';
 import 'package:interview/presentation/widgets/custom_image.dart';
-import 'package:interview/presentation/widgets/custom_navigation_animation.dart';
 import 'package:interview/presentation/widgets/custom_sub_header_text.dart';
 import 'package:interview/presentation/widgets/custom_header_text.dart';
 
@@ -29,18 +28,19 @@ class _OnboardingScreenTwoState extends State<OnboardingScreenTwo> {
           child: Center(
             child: Column(
               children: [
-                SizedBox(height: SizeConfig.screenHeight * 0.185),
+                SizedBox(height: SizeConfig.screenHeight * 0.12),
                 CustomImage(
                   width: 0.330,
                   height: 0.330,
-                  icon: ImageAssets.onboardingImageOneSVG,
+                  icon: ImageAssets.onboardingImageTwoSVG,
                 ),
                 SizedBox(height: SizeConfig.screenHeight * 0.056),
-                CustomHeaderText(text: 'Explore your new skill today'),
+                CustomHeaderText(text: 'Explore your new skill\ntoday'),
                 SizedBox(height: SizeConfig.screenHeight * 0.008),
                 CustomSubHeaderText(
                   text:
                       'Our platform is designed to help you explore new skills. Let’s learn & grow with Eduline!',
+                  textAlign: TextAlign.center,
                 ),
 
                 SizedBox(height: SizeConfig.screenHeight * 0.040),
@@ -64,7 +64,12 @@ class _OnboardingScreenTwoState extends State<OnboardingScreenTwo> {
                 SizedBox(height: SizeConfig.screenHeight * 0.064),
                 ElevatedButton(
                   onPressed: () {
-                    Get.offAll(CustomNavigationAnimation(screen: SigninScreen()));
+                    Get.offAll(
+                      () => SigninScreen(),
+                      transition: Transition.rightToLeft,
+                      curve: Curves.fastOutSlowIn,
+                      duration: const Duration(milliseconds: 500),
+                    );
                   },
                   child: Text('Get Started'),
                 ),

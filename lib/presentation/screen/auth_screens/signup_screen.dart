@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:interview/app/styling/size_config.dart';
+import 'package:interview/presentation/controllers/signup_controller.dart';
 import 'package:interview/presentation/screen/auth_screens/signin_screen.dart';
+import 'package:interview/presentation/widgets/custom_password_field_with_strengh.dart';
 import 'package:interview/presentation/widgets/custom_text_button.dart';
 import 'package:interview/presentation/widgets/custom_header_text.dart';
-import 'package:interview/presentation/widgets/custom_navigation_animation.dart';
 import 'package:interview/presentation/widgets/custom_sub_header_text.dart';
 import 'package:interview/presentation/widgets/custom_text_form_field.dart';
 import 'package:interview/presentation/widgets/custom_title_text.dart';
@@ -27,9 +28,12 @@ class _SignupScreenState extends State<SignupScreen> {
 
   final _emailRegex = RegExp(r'^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$');
 
+  final _signupController = Get.put(SignupController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(leading: BackButton()),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -106,9 +110,42 @@ class _SignupScreenState extends State<SignupScreen> {
                       return null;
                     },
                   ),
+                  SizedBox(height: SizeConfig.screenHeight * 0.008),
+                  PasswordFieldWithStrength(),
                   SizedBox(height: SizeConfig.screenHeight * 0.024),
 
-                  ElevatedButton(onPressed: () {}, child: Text('Sign Up')),
+                  /*ElevatedButton(
+                    onPressed: () {
+                      Get.offAll(
+                        () => SuccessPopupScreen(
+                          title: 'sddf',
+                          message: 'message',
+                          onContinue: () {},
+                        ),
+                        transition: Transition.rightToLeft,
+                        curve: Curves.fastOutSlowIn,
+                        duration: const Duration(milliseconds: 500),
+                      );
+                    },
+                    child: Text('Sign Up'),
+                  ),*/
+                  Obx(
+                    () => ElevatedButton(
+                      onPressed:
+                          _signupController.isLoading.value
+                              ? null
+                              : () {
+                                if (_formKey.currentState!.validate()) {
+                                  _signupController.signUp(
+                                    _emailTEController.text.trim(),
+                                    _passwordTEController.text.trim(),
+                                    _fullNameTEController.text.trim(),
+                                  );
+                                }
+                              },
+                      child: Text('Sign Up'),
+                    ),
+                  ),
                   SizedBox(height: SizeConfig.screenHeight * 0.016),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -117,7 +154,12 @@ class _SignupScreenState extends State<SignupScreen> {
                       CustomTextButton(
                         text: 'Sign In',
                         onPressed: () {
-                          Get.to(CustomNavigationAnimation(screen: SigninScreen()));
+                          Get.to(
+                            () => SigninScreen(),
+                            transition: Transition.rightToLeft,
+                            curve: Curves.fastOutSlowIn,
+                            duration: const Duration(milliseconds: 500),
+                          );
                         },
                       ),
                     ],
@@ -129,5 +171,13 @@ class _SignupScreenState extends State<SignupScreen> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _emailTEController.dispose();
+    _fullNameTEController.dispose();
+    _passwordTEController.dispose();
+    super.dispose();
   }
 }

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:interview/app/styling/size_config.dart';
+import 'package:interview/presentation/screen/enable_location_screen.dart';
 import 'package:interview/presentation/screen/welcome_screens/onboarding_screen_one.dart';
+import 'package:interview/presentation/utility/app_colors.dart';
 import 'package:interview/presentation/utility/image_assets.dart';
 import 'package:interview/presentation/widgets/custom_image.dart';
-import 'package:interview/presentation/widgets/custom_navigation_animation.dart';
 import 'package:interview/presentation/widgets/custom_sub_header_text.dart';
 import 'package:interview/presentation/widgets/custom_header_text.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -23,10 +25,25 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void _delay() async {
-    //final session = Supabase.instance.client.auth.currentSession;
-    await Future.delayed(Duration(seconds: 2));
-    if (mounted) {
-      Get.offAll(CustomNavigationAnimation(screen: OnboardingScreenOne()));
+    final session = Supabase.instance.client.auth.currentSession;
+    await Future.delayed(Duration(seconds: 3));
+    if (!mounted) return;
+    if (session != null) {
+      Get.offAll(
+        () => EnableLocationScreen(),
+        transition: Transition.rightToLeft,
+        curve: Curves.fastOutSlowIn,
+        duration: const Duration(milliseconds: 500),
+      );
+    } else {
+      if (mounted) {
+        Get.offAll(
+          () => OnboardingScreenOne(),
+          transition: Transition.rightToLeft,
+          curve: Curves.fastOutSlowIn,
+          duration: const Duration(milliseconds: 500),
+        );
+      }
     }
   }
 
@@ -36,8 +53,8 @@ class _SplashScreenState extends State<SplashScreen> {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: SizeConfig.screenWidth * 0.020,
-            vertical: SizeConfig.screenHeight * 0.020,
+            horizontal: SizeConfig.screenWidth * 0.026,
+            vertical: SizeConfig.screenHeight * 0.026,
           ),
           child: Center(
             child: Column(
@@ -54,7 +71,11 @@ class _SplashScreenState extends State<SplashScreen> {
                 CustomSubHeaderText(
                   text:
                       'I must write the real test will be in English language and this app just helps you to understand the materials in your language',
+                  textAlign: TextAlign.center,
                 ),
+                Spacer(),
+                CircularProgressIndicator(color: AppColors.primaryColor),
+                SizedBox(height: SizeConfig.screenHeight * 0.04),
               ],
             ),
           ),

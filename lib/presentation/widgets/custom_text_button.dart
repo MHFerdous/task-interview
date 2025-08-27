@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:interview/app/styling/text_styles.dart';
-import 'package:interview/presentation/utility/app_colors.dart';
 
 class CustomTextButton extends StatelessWidget {
   const CustomTextButton({
     super.key,
     required this.text,
     required this.onPressed,
+    this.color,
   });
 
   final String text;
   final VoidCallback onPressed;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class CustomTextButton extends StatelessWidget {
       child: Text(
         text,
         style: TextStyles.subHeader.copyWith(
-          color: AppColors.primaryColor,
+          color: color,
           fontWeight: FontWeight.bold,
         ),
       ),

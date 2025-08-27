@@ -4,7 +4,6 @@ import 'package:interview/app/styling/size_config.dart';
 import 'package:interview/presentation/screen/welcome_screens/onboarding_screen_two.dart';
 import 'package:interview/presentation/utility/image_assets.dart';
 import 'package:interview/presentation/widgets/custom_image.dart';
-import 'package:interview/presentation/widgets/custom_navigation_animation.dart';
 import 'package:interview/presentation/widgets/custom_sub_header_text.dart';
 import 'package:interview/presentation/widgets/custom_header_text.dart';
 
@@ -28,18 +27,19 @@ class _OnboardingScreenOneState extends State<OnboardingScreenOne> {
           child: Center(
             child: Column(
               children: [
-                SizedBox(height: SizeConfig.screenHeight * 0.185),
+                SizedBox(height: SizeConfig.screenHeight * 0.12),
                 CustomImage(
-                  width: 0.330,
-                  height: 0.330,
+                  width: 0.340,
+                  height: 0.340,
                   icon: ImageAssets.onboardingImageOneSVG,
                 ),
                 SizedBox(height: SizeConfig.screenHeight * 0.056),
-                CustomHeaderText(text: 'Best online courses in the world'),
+                CustomHeaderText(text: 'Best online courses \nin the world'),
                 SizedBox(height: SizeConfig.screenHeight * 0.008),
                 CustomSubHeaderText(
                   text:
                       'Now you can learn anywhere, anytime, even if there is no internet access!',
+                  textAlign: TextAlign.center,
                 ),
 
                 SizedBox(height: SizeConfig.screenHeight * 0.040),
@@ -57,7 +57,12 @@ class _OnboardingScreenOneState extends State<OnboardingScreenOne> {
                 SizedBox(height: SizeConfig.screenHeight * 0.064),
                 ElevatedButton(
                   onPressed: () {
-                    Get.to(CustomNavigationAnimation(screen: OnboardingScreenTwo()));
+                    Get.to(
+                      () => OnboardingScreenTwo(),
+                      transition: Transition.rightToLeft,
+                      curve: Curves.fastOutSlowIn,
+                      duration: const Duration(milliseconds: 500),
+                    );
                   },
                   child: Text('Next'),
                 ),
