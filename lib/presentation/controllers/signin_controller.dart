@@ -38,10 +38,8 @@ class SigninController extends GetxController {
       }
     } on AuthException catch (e) {
       Get.snackbar("Error", "Failed to sign in! Please try again.");
-      print(e.toString());
     } catch (e) {
       Get.snackbar("Error", "Failed to sign in! Please try again.");
-      print(e.toString());
     } finally {
       isLoading.value = false;
     }

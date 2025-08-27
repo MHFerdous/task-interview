@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:interview/app/styling/text_styles.dart';
 import 'package:interview/presentation/screen/welcome_screens/splash_screen.dart';
 import 'package:interview/presentation/utility/app_colors.dart';
@@ -10,7 +11,7 @@ import 'app/styling/size_config.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await GetStorage.init();
   await dotenv.load(fileName: ".env");
   await Supabase.initialize(
     url: dotenv.env["SUPABASE_URL"]!,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:interview/app/styling/size_config.dart';
+import 'package:interview/presentation/controllers/auth_controller.dart';
 import 'package:interview/presentation/controllers/signin_controller.dart';
 import 'package:interview/presentation/screen/auth_screens/forgot_password_screen.dart';
 import 'package:interview/presentation/screen/auth_screens/signup_screen.dart';
@@ -30,6 +31,7 @@ class _SigninScreenState extends State<SigninScreen> {
   final _emailRegex = RegExp(r'^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$');
 
   final _signinController = Get.put(SigninController());
+  final _authController = Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +107,22 @@ class _SigninScreenState extends State<SigninScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(children: [CustomSubHeaderText(text: 'Remember Me')]),
+                      Obx(
+                        () => Row(
+                          children: [
+                            Checkbox(
+                              checkColor: AppColors.whiteColor,
+                              activeColor: AppColors.primaryColor,
+                              value: _authController.rememberMe.value,
+                              onChanged:
+                                  (val) => _authController.toggleRemember(
+                                    val ?? false,
+                                  ),
+                            ),
+                            const CustomSubHeaderText(text: "Remember me"),
+                          ],
+                        ),
+                      ),
                       CustomTextButton(
                         text: 'Forgot Password',
                         color: AppColors.subHeaderColor,

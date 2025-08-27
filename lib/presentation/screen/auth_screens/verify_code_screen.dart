@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:interview/app/styling/size_config.dart';
 import 'package:interview/presentation/controllers/password_recovery_controller.dart';
 import 'package:interview/presentation/controllers/restart_timer_controller.dart';
-import 'package:interview/presentation/screen/auth_screens/reset_password_screen.dart';
 import 'package:interview/presentation/utility/app_colors.dart';
 import 'package:interview/presentation/widgets/custom_text_button.dart';
 import 'package:interview/presentation/widgets/custom_header_text.dart';

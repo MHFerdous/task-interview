@@ -40,10 +40,8 @@ class SignupController extends GetxController {
       }
     } on AuthException catch (e) {
       Get.snackbar("Error", "Failed to create account! Please try again.");
-      print(e.toString());
     } catch (e) {
       Get.snackbar("Error", "Failed to create account! Please try again.");
-      print(e.toString());
     } finally {
       isLoading.value = false;
     }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:interview/app/styling/size_config.dart';
+import 'package:interview/presentation/controllers/auth_controller.dart';
 import 'package:interview/presentation/screen/enable_location_screen.dart';
 import 'package:interview/presentation/screen/welcome_screens/onboarding_screen_one.dart';
 import 'package:interview/presentation/utility/app_colors.dart';
@@ -8,7 +9,6 @@ import 'package:interview/presentation/utility/image_assets.dart';
 import 'package:interview/presentation/widgets/custom_image.dart';
 import 'package:interview/presentation/widgets/custom_sub_header_text.dart';
 import 'package:interview/presentation/widgets/custom_header_text.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -18,6 +18,8 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final _authController = Get.put(AuthController());
+
   @override
   void initState() {
     super.initState();
@@ -25,10 +27,9 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void _delay() async {
-    final session = Supabase.instance.client.auth.currentSession;
     await Future.delayed(Duration(seconds: 3));
     if (!mounted) return;
-    if (session != null) {
+    if (_authController.isUserRemembered()) {
       Get.offAll(
         () => EnableLocationScreen(),
         transition: Transition.rightToLeft,

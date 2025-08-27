@@ -1,16 +1,12 @@
 import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
 import 'package:interview/presentation/screen/auth_screens/reset_password_screen.dart';
-import 'package:interview/presentation/screen/auth_screens/signin_screen.dart';
 import 'package:interview/presentation/screen/auth_screens/success_popup_screen.dart';
 import 'package:interview/presentation/screen/auth_screens/verify_code_screen.dart';
+import 'package:interview/presentation/screen/enable_location_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class PasswordRecoveryController extends GetxController {
-  final email = ''.obs;
-  final code = ''.obs;
-  final newPassword = ''.obs;
-  final confirmPassword = ''.obs;
   final isLoading = false.obs;
 
   Future<void> sendResetCode(String email) async {
@@ -40,7 +36,7 @@ class PasswordRecoveryController extends GetxController {
       Get.snackbar('Success', 'OTP matched');
       Get.to(() => ResetPasswordScreen());
     } catch (e) {
-      Get.snackbar(e.toString(), 'Failed to match OTP');
+      Get.snackbar('Sorry', 'Failed to match OTP');
     }
 
     isLoading.value = false;
@@ -66,7 +62,7 @@ class PasswordRecoveryController extends GetxController {
           onContinue: () {
             Get.back();
             Get.offAll(
-              () => SigninScreen(),
+              () => EnableLocationScreen(),
               transition: Transition.rightToLeft,
               curve: Curves.fastOutSlowIn,
               duration: const Duration(milliseconds: 500),
@@ -78,7 +74,6 @@ class PasswordRecoveryController extends GetxController {
     } catch (e) {
       Get.snackbar('Error', 'Failed to change password');
     }
-
     isLoading.value = false;
   }
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:interview/app/styling/size_config.dart';
 import 'package:interview/presentation/controllers/password_recovery_controller.dart';
-import 'package:interview/presentation/screen/auth_screens/verify_code_screen.dart';
 import 'package:interview/presentation/widgets/custom_header_text.dart';
 import 'package:interview/presentation/widgets/custom_sub_header_text.dart';
 import 'package:interview/presentation/widgets/custom_text_form_field.dart';
@@ -50,6 +49,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         CustomSubHeaderText(
                           text:
                               'Enter your email, we will send a verification code to email',
+                          textAlign: TextAlign.center,
                         ),
 
                         SizedBox(height: SizeConfig.screenHeight * 0.036),
