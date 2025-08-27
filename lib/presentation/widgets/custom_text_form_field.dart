@@ -11,6 +11,7 @@ class CustomTextFormField extends StatefulWidget {
   final String? Function(String?)? validator;
   final AutovalidateMode autoValidateMode;
   final bool isPasswordField;
+  final ValueChanged<String>? onChanged;
 
   const CustomTextFormField({
     super.key,
@@ -21,6 +22,7 @@ class CustomTextFormField extends StatefulWidget {
     this.autoValidateMode = AutovalidateMode.disabled,
     required this.textInputType,
     required this.isPasswordField,
+    this.onChanged,
   });
 
   @override
@@ -46,24 +48,26 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           decoration: InputDecoration(
             hintText: widget.hintText,
             errorText: fieldState.errorText,
-            suffixIcon: widget.isPasswordField
-                ? IconButton(
-              icon: PhosphorIcon(
-                _obscureText
-                    ? PhosphorIconsDuotone.eyeClosed
-                    : PhosphorIconsDuotone.eye,
-                color: AppColors.titleColors,
-              ),
-              onPressed: () {
-                setState(() {
-                  _obscureText = !_obscureText;
-                });
-              },
-            )
-                : null,
+            suffixIcon:
+                widget.isPasswordField
+                    ? IconButton(
+                      icon: PhosphorIcon(
+                        _obscureText
+                            ? PhosphorIconsDuotone.eyeClosed
+                            : PhosphorIconsDuotone.eye,
+                        color: AppColors.titleColors,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _obscureText = !_obscureText;
+                        });
+                      },
+                    )
+                    : null,
           ),
           onChanged: (value) {
             fieldState.didChange(value);
+            widget.onChanged?.call(value);
           },
         );
       },

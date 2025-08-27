@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:interview/app/styling/size_config.dart';
+import 'package:interview/presentation/controllers/password_strength_checker_controller.dart';
 import 'package:interview/presentation/controllers/signup_controller.dart';
 import 'package:interview/presentation/screen/auth_screens/signin_screen.dart';
-import 'package:interview/presentation/widgets/custom_password_field_with_strengh.dart';
 import 'package:interview/presentation/widgets/custom_text_button.dart';
 import 'package:interview/presentation/widgets/custom_header_text.dart';
 import 'package:interview/presentation/widgets/custom_sub_header_text.dart';
@@ -29,6 +29,8 @@ class _SignupScreenState extends State<SignupScreen> {
   final _emailRegex = RegExp(r'^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$');
 
   final _signupController = Get.put(SignupController());
+
+  final _passwordController = Get.put(PasswordStrengthCheckerController());
 
   @override
   Widget build(BuildContext context) {
@@ -109,26 +111,29 @@ class _SignupScreenState extends State<SignupScreen> {
                       }
                       return null;
                     },
+                    onChanged: _passwordController.checkPassword,
                   ),
                   SizedBox(height: SizeConfig.screenHeight * 0.008),
-                  PasswordFieldWithStrength(),
+                  Obx(
+                    () => LinearProgressIndicator(
+                      value: _passwordController.strengthPercent.value,
+                      backgroundColor: Colors.grey[300],
+                      color: _passwordController.strengthColor,
+                      minHeight: 6,
+                    ),
+                  ),
+                  SizedBox(height: SizeConfig.screenHeight * 0.008),
+                  Obx(
+                    () => Text(
+                      _passwordController.strengthText.value,
+                      style: TextStyle(
+                        color: _passwordController.strengthColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                   SizedBox(height: SizeConfig.screenHeight * 0.024),
 
-                  /*ElevatedButton(
-                    onPressed: () {
-                      Get.offAll(
-                        () => SuccessPopupScreen(
-                          title: 'sddf',
-                          message: 'message',
-                          onContinue: () {},
-                        ),
-                        transition: Transition.rightToLeft,
-                        curve: Curves.fastOutSlowIn,
-                        duration: const Duration(milliseconds: 500),
-                      );
-                    },
-                    child: Text('Sign Up'),
-                  ),*/
                   Obx(
                     () => ElevatedButton(
                       onPressed:

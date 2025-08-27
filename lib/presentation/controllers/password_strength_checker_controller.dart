@@ -1,69 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-enum PasswordStrength { weak, medium, strong }
+enum StrengthLevel { none, weak, medium, strong, great }
 
-class PasswordStrengthController extends GetxController {
-  var password = ''.obs;
-  var strength = PasswordStrength.weak.obs;
+class PasswordStrengthCheckerController extends GetxController {
+  var strength = StrengthLevel.none.obs;
+  var strengthPercent = 0.0.obs;
+  var strengthText = "".obs;
 
-  void checkPassword(String value) {
-    password.value = value;
+  final letterReg = RegExp(r".*[A-Za-z].*");
+  final digitReg = RegExp(r".*[0-9].*");
 
-    bool hasUppercase = value.contains(RegExp(r'[A-Z]'));
-    bool hasDigits = value.contains(RegExp(r'[0-9]'));
-    bool hasLowercase = value.contains(RegExp(r'[a-z]'));
-    bool hasSpecialCharacters = value.contains(
-      RegExp(r'[!@#$%^&*(),.?":{}|<>]'),
-    );
-    bool hasMinLength = value.length >= 8;
-
-    int strengthPoints = 0;
-    if (hasDigits) strengthPoints++;
-    if (hasUppercase) strengthPoints++;
-    if (hasLowercase) strengthPoints++;
-    if (hasSpecialCharacters) strengthPoints++;
-    if (hasMinLength) strengthPoints++;
-
-    if (strengthPoints <= 2) {
-      strength.value = PasswordStrength.weak;
-    } else if (strengthPoints <= 4) {
-      strength.value = PasswordStrength.medium;
+  void checkPassword(String pw) {
+    if (pw.isEmpty) {
+      strength.value = StrengthLevel.none;
+      strengthPercent.value = 0.0;
+      strengthText.value = 'Enter a password';
+    } else if (pw.length < 6) {
+      strength.value = StrengthLevel.weak;
+      strengthPercent.value = 0.25;
+      strengthText.value = 'Too short';
+    } else if (pw.length < 8) {
+      strength.value = StrengthLevel.medium;
+      strengthPercent.value = 0.5;
+      strengthText.value = 'Could be stronger';
     } else {
-      strength.value = PasswordStrength.strong;
-    }
-  }
-
-  double get progressValue {
-    switch (strength.value) {
-      case PasswordStrength.weak:
-        return 0.3;
-      case PasswordStrength.medium:
-        return 0.6;
-      case PasswordStrength.strong:
-        return 1.0;
-    }
-  }
-
-  String get strengthLabel {
-    switch (strength.value) {
-      case PasswordStrength.weak:
-        return "Weak";
-      case PasswordStrength.medium:
-        return "Medium";
-      case PasswordStrength.strong:
-        return "Strong";
+      final hasLet = letterReg.hasMatch(pw);
+      final hasDgt = digitReg.hasMatch(pw);
+      if (!hasLet || !hasDgt) {
+        strength.value = StrengthLevel.strong;
+        strengthPercent.value = 0.75;
+        strengthText.value = 'Strong';
+      } else {
+        strength.value = StrengthLevel.great;
+        strengthPercent.value = 1.0;
+        strengthText.value = 'Great';
+      }
     }
   }
 
   Color get strengthColor {
     switch (strength.value) {
-      case PasswordStrength.weak:
+      case StrengthLevel.weak:
         return Colors.red;
-      case PasswordStrength.medium:
+      case StrengthLevel.medium:
         return Colors.orange;
-      case PasswordStrength.strong:
+      case StrengthLevel.strong:
+        return Colors.blue;
+      case StrengthLevel.great:
         return Colors.green;
+      default:
+        return Colors.grey;
     }
   }
 }
