@@ -1,13 +1,13 @@
-*A clean and reactive Flutter app using **SupaBase** for backend, **GetX** for state management and **GetStorage** for local persistence. It showcases a complete, UX-driven onboarding, authentication, and setup flow, implementing modern mobile app design patterns.
+*A clean and reactive Flutter app using **SupaBase** for backend, **GetX** for state management and **GetStorage** for local persistence. It showcases a complete, UX-driven onboarding, authentication, and setup flow, implementing modern mobile app design patterns.*
 
 ##  App Flow Overview
 
 ### 1. **Splash / Onboarding**
-- Multi-step onboarding introduces users to key app features with swipe-able pages and engaging illustrations.
+- Multi-step onboarding introduces users to key app features with swipeable pages and engaging illustrations.
 
 ### 2. **Sign In / Sign Up**
 - Secure login with email/password.
-- Includes a **“Remember Me”** feature—users stay logged in across sessions if checked.
+- Includes a **“Remember Me”** feature users to stay logged in across sessions if checked.
 - Unchecked → returns to sign-in on next launch.
 
 ### 3. **Forgot Password**
@@ -23,7 +23,7 @@
 
 ## Installation
 
-Install This project using the command prompt
+Install this project using the command prompt
 
 ```bash
   git clone https://github.com/MHFerdous/task-interview.git
