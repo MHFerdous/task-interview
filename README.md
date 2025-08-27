@@ -1,16 +1,39 @@
-# interview
+*A clean and reactive Flutter app using **SupaBase** for backend, **GetX** for state management and **GetStorage** for local persistence. It showcases a complete, UX-driven onboarding, authentication, and setup flow, implementing modern mobile app design patterns.*
 
-A new Flutter project.
+##  App Flow Overview
 
-## Getting Started
+### 1. **Splash / Onboarding**
+- Multi-step onboarding introduces users to key app features with swipeable pages and engaging illustrations.
 
-This project is a starting point for a Flutter application.
+### 2. **Sign In / Sign Up**
+- Secure login with email/password.
+- Includes a **“Remember Me”** feature users to stay logged in across sessions if checked.
+- Unchecked → returns to sign-in on next launch.
 
-A few resources to get you started if this is your first Flutter project:
+### 3. **Forgot Password**
+- Multi-step password recovery flow:
+    - Enter email
+    - Verify via code
+    - Reset password
+- Keeps users engaged with clear progression and feedback.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### 4. **Location Access / Language Selection**
+- Requests location permission, then navigates to language selection.
+- Language screen features a scrollable list with flag icons and a "Select"/"Selected" button. Selection is handled reactively via GetX.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Installation
+
+Install this project using the command prompt
+
+```bash
+  git clone https://github.com/MHFerdous/task-interview.git
+```
+```bash
+  cd task-interview
+```
+```bash
+  flutter pub get
+```
+```bash
+  flutter run
+```
